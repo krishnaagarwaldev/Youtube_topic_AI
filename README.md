@@ -1,41 +1,45 @@
 # 📐 NCERT Maths Analyzer & Resource Finder
 
+LIVE DEMO : [youtube-topic-link-rag-ai.streamlit.app](https://youtube-topic-link-rag-ai.streamlit.app/)
+
 A Streamlit app that analyzes CBSE Class 10 NCERT Mathematics PDFs, identifies key topics, and curates YouTube tutorial videos for each topic. Also includes a RAG-powered Q&A mode where students can ask questions and get answers grounded in the textbook.
 
 ---
 
 ## Features
 
-| Mode | What it does |
-|---|---|
-| 📄 **Auto Mode** | Upload PDF → LLaMA 3.1 extracts topics → YouTube videos fetched per topic |
-| 💬 **Ask Mode** | Type a topic/question → FAISS searches PDF → LLaMA answers → YouTube videos shown |
+| Mode                  | What it does                                                                         |
+| --------------------- | ------------------------------------------------------------------------------------ |
+| 📄**Auto Mode** | Upload PDF → LLaMA 3.1 extracts topics → YouTube videos fetched per topic          |
+| 💬**Ask Mode**  | Type a topic/question → FAISS searches PDF → LLaMA answers → YouTube videos shown |
 
 ---
 
 ## Tech Stack
 
-| Component | Tool |
-|---|---|
-| PDF Loading | LangChain `PyPDFLoader` |
-| LLM | `meta-llama/Llama-3.1-8B-Instruct` via HuggingFace Inference API |
-| Embeddings | `sentence-transformers/all-MiniLM-L6-v2` (free, local) |
-| Vector Store | FAISS (in-memory) |
-| Video Search | YouTube Data API v3 |
-| UI | Streamlit |
-| Deployment | Streamlit Cloud |
+| Component    | Tool                                                               |
+| ------------ | ------------------------------------------------------------------ |
+| PDF Loading  | LangChain`PyPDFLoader`                                           |
+| LLM          | `meta-llama/Llama-3.1-8B-Instruct` via HuggingFace Inference API |
+| Embeddings   | `sentence-transformers/all-MiniLM-L6-v2` (free, local)           |
+| Vector Store | FAISS (in-memory)                                                  |
+| Video Search | YouTube Data API v3                                                |
+| UI           | Streamlit                                                          |
+| Deployment   | Streamlit Cloud                                                    |
 
 ---
 
 ## Setup
 
 ### 1. Clone the repository
+
 ```bash
 git clone https://github.com/YOUR_USERNAME/ncert-maths-analyzer.git
 cd ncert-maths-analyzer
 ```
 
 ### 2. Install dependencies
+
 ```bash
 pip install -r requirements.txt
 ```
@@ -43,22 +47,26 @@ pip install -r requirements.txt
 ### 3. Get API Keys
 
 **HuggingFace Token (free)**
+
 1. Go to https://huggingface.co/settings/tokens
 2. Create new token → enable **"Make calls to Inference Providers"** permission
 3. Request LLaMA access at https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct
 
 **YouTube Data API v3 Key (free)**
+
 1. Go to https://console.cloud.google.com → create a project
 2. Enable "YouTube Data API v3" → Credentials → Create API Key
 3. Free quota: 10,000 units/day = ~100 searches/day (each search = 100 units)
 
 ### 4. Create .env file
+
 ```bash
 cp .env.example .env
 # Edit .env and paste your keys — keys are NEVER shown in the UI
 ```
 
 ### 5. Run locally
+
 ```bash
 streamlit run app.py
 ```
@@ -70,10 +78,12 @@ streamlit run app.py
 1. Push code to GitHub (`.gitignore` excludes `.env`)
 2. Go to https://share.streamlit.io → New app → select repo → `app.py`
 3. Advanced settings → Secrets → paste:
+
 ```toml
 HUGGINGFACEHUB_API_TOKEN = "hf_your_token_here"
 YOUTUBE_API_KEY = "your_youtube_key_here"
 ```
+
 4. Deploy → get public link in ~2 minutes
 
 ---
